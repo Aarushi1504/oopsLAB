@@ -1,44 +1,54 @@
 #include <iostream>
 using namespace std;
 
+class Array {
+    int arr[100];
+    int n;
+
+public:
+    void input() {
+        cout << "Enter size: ";
+        cin >> n;
+
+        cout << "Enter elements: ";
+        for (int i = 0; i < n; i++) {
+            cin >> arr[i];
+        }
+    }
+
+    void display() {
+        for (int i = 0; i < n; i++) {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+    }
+
+    void merge(Array a, Array b) {
+        n = a.n + b.n;
+
+        for (int i = 0; i < a.n; i++) {
+            arr[i] = a.arr[i];
+        }
+
+        for (int i = 0; i < b.n; i++) {
+            arr[a.n + i] = b.arr[i];
+        }
+    }
+};
+
 int main() {
-    int n1, n2;
+    Array a, b, c;
 
-    cout << "Enter size of first array: ";
-    cin >> n1;
+    cout << "Enter first array:\n";
+    a.input();
 
-    int a[n1];
-    cout << "Enter elements of first array: ";
-    for (int i = 0; i < n1; i++) {
-        cin >> a[i];
-    }
+    cout << "Enter second array:\n";
+    b.input();
 
-    cout << "Enter size of second array: ";
-    cin >> n2;
-
-    int b[n2];
-    cout << "Enter elements of second array: ";
-    for (int i = 0; i < n2; i++) {
-        cin >> b[i];
-    }
-
-    // Third array
-    int c[n1 + n2];
-
-    // Copy first array
-    for (int i = 0; i < n1; i++) {
-        c[i] = a[i];
-    }
-
-    // Copy second array
-    for (int i = 0; i < n2; i++) {
-        c[n1 + i] = b[i];
-    }
+    c.merge(a, b);
 
     cout << "Merged array: ";
-    for (int i = 0; i < n1 + n2; i++) {
-        cout << c[i] << " ";
-    }
+    c.display();
 
     return 0;
 }
